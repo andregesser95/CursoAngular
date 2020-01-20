@@ -1,11 +1,15 @@
+// imports criados do Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
+
+//Imports criados por mim
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule
