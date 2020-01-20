@@ -4,15 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 //Imports criados por mim
-import { PhotoComponent } from './photo/photo.component';
+import { PhotosModule } from './photos/photos.module';
+import { AppRoutingModule } from './app.routing.module';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PhotoComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ErrorsModule,
+    PhotosModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
