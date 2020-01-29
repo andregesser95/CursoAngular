@@ -7,7 +7,7 @@ import { PlatformDetectorService } from "src/app/core/plataform-detector/platfor
 @Component({
     templateUrl: './signin.component.html'
 })
-export class SigninCompoent implements OnInit {
+export class SignInCompoent implements OnInit {
 
     loginForm: FormGroup;
     @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
