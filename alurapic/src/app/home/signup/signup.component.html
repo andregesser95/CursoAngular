@@ -1,9 +1,10 @@
 <h4 class="text-center"> Register to embrace a new world!</h4>
 
 <form [formGroup]="signupForm"
-      class="form mt-4">
+      class="form mt-4"
+      (submit)="signup()">
     <div class="form-group">
-        <input formControlName="email"
+        <input #emailInput formControlName="email"
                placeholder="email"
                class="form-control"
                inputmode="email"
@@ -73,6 +74,6 @@
     <button [disabled]="signupForm.invalid || signupForm.pending"
             class="btn btn-primary btn-block">Register</button>
 
-    <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
+    <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 
 </form>
