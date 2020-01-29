@@ -40,4 +40,8 @@ export class PhotoService {
             API + '/photos/' + photoId + '/comments'
         );
     }
+
+    addComment(photoId: number, ) {
+
+    }
 }
