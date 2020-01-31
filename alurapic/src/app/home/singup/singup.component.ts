@@ -1,70 +1,72 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
-import { UserNotTakenValidatorService } from './user-not-taken-validator.services';
+import { lowerCaseValidator } from '../../shared/validators/lower-case.validator';
+import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
 import { NewUser } from './new-user';
 import { SignUpService } from './signup.service';
 import { Router } from '@angular/router';
-import { PlatformDetectorService } from 'src/app/core/plataform-detector/platform-detector.services';
+import { PlatformDetectorService } from '../../core/plataform-detector/platform-detector.service';
 
 @Component({
     templateUrl: './signup.component.html',
-    providers: [UserNotTakenValidatorService]
+    providers: [ UserNotTakenValidatorService ]
 })
 export class SignUpComponent implements OnInit {
-
+    
     signupForm: FormGroup;
     @ViewChild('emailInput') emailInput: ElementRef<HTMLInputElement>;
-
+    
     constructor(
         private formBuilder: FormBuilder,
-        private userNotTakenService: UserNotTakenValidatorService,
-        private signupService: SignUpService,
+        private userNotTakenValidatorService: UserNotTakenValidatorService,
+        private signUpService: SignUpService,
         private router: Router,
-        private platformDetectorService: PlatformDetectorService
-    ) { }
+        private platformDetectorService: PlatformDetectorService) {}
 
     ngOnInit(): void {
         this.signupForm = this.formBuilder.group({
-            email: ['',
+            email: ['', 
                 [
                     Validators.required,
                     Validators.email
                 ]
             ],
-            fullName: ['',
+            fullName: ['', 
                 [
                     Validators.required,
                     Validators.minLength(2),
                     Validators.maxLength(40)
                 ]
             ],
-            userName: ['',
+            userName: ['', 
                 [
                     Validators.required,
                     lowerCaseValidator,
                     Validators.minLength(2),
                     Validators.maxLength(30)
                 ],
-                this.userNotTakenService.checkUserNameTaken()
+                this.userNotTakenValidatorService.checkUserNameTaken()
             ],
-            password: ['',
+            password: ['', 
                 [
                     Validators.required,
                     Validators.minLength(8),
-                    Validators.maxLength(18)
+                    Validators.maxLength(14)
                 ]
             ]
-        })
-        this.platformDetectorService.isPlatformBrowser() &&
-        this.emailInput.nativeElement.focus();
-    }
+        });
+
+        this.platformDetectorService.isPlatformBrowser() && 
+            this.emailInput.nativeElement.focus();    
+    } 
 
     signup() {
         const newUser = this.signupForm.getRawValue() as NewUser;
-        this.signupService
+        this.signUpService
             .signup(newUser)
-            .subscribe(() => this.router.navigate(['']),
-                err => console.log(err));
+            .subscribe(
+                () => this.router.navigate(['']),
+                err => console.log(err)
+            );
     }
 }
